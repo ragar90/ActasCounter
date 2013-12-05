@@ -1,5 +1,5 @@
 class Actum < ActiveRecord::Base
-  attr_accessible :alianza, :dc, :liberal, :libre, :nacional, :numero, :pac, :pinu, :ud, :faper, :nulos, :blancos, :user_id, :ready_for_review, :is_sum_ok, :actum_type, :municipio_id
+  attr_accessible :alianza, :dc, :liberal, :libre, :nacional, :numero, :pac, :pinu, :ud, :nulos, :blancos, :user_id, :ready_for_review,:is_sum_ok,:image_changed, :municipio_id
 
   validates :numero, :uniqueness=> {:scope => :actum_type}
   
@@ -8,7 +8,7 @@ class Actum < ActiveRecord::Base
   belongs_to :user #, counter_cache: true
   belongs_to :municipio
   has_many :verifications, class_name: "Verification",:foreign_key=>"acta_id"
-  has_many :reportes
+  has_many :reportes, class_name: "Reporte",:foreign_key=>"acta_id"
   after_save :update_counters
 
   ACTUM_TYPE_FULL = {
@@ -33,6 +33,14 @@ class Actum < ActiveRecord::Base
   
   def to_param  # overridden
     numero
+  end
+  
+  def image
+    versioned_image(4)
+  end
+  
+  def versioned_image(v)
+    "http://s3-us-west-2.amazonaws.com/actashn/presidente/#{v}/%05d.jpg" % self.numero
   end
 
   def self.count_all_votes

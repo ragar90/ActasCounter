@@ -10,8 +10,8 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
-
 ActiveRecord::Schema.define(:version => 20131205210951) do
+
 
   create_table "acta", :force => true do |t|
     t.string   "numero"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20131205210951) do
     t.string   "actum_type",       :default => "p"
     t.integer  "municipio_id"
     t.integer  "faper"
+
   end
 
   add_index "acta", ["liberal", "nacional", "libre", "pac", "ud", "dc", "alianza", "pinu", "blancos", "nulos"], :name => "acta_counts_index"

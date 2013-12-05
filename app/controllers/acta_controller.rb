@@ -181,7 +181,7 @@ class ActaController < ApplicationController
           format.json { render json: @actum, status: :created, location: @actum }
         else
           i=@actum.numero.to_i
-          @imageUrl = "http://s3-us-west-2.amazonaws.com/actashn/presidente/3/%05d.jpg" % i
+          @imageUrl = @actum.image
           
           format.html { render action: "new" }
           format.json { render json: @actum.errors, status: :unprocessable_entity }

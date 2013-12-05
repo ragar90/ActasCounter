@@ -8,7 +8,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
 #---- Ejemplo de lo que tiene que generar el script:
 
 # departamento = Departamento.create(:name=>"Atlantida",:num=>1)
