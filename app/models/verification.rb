@@ -6,7 +6,7 @@ class Verification < ActiveRecord::Base
    
   #validates :user_id, :uniqueness => {:scope => :acta_id}
   
-  validates :faper, :alianza, :dc, :liberal, :libre, :nacional, :pac, :pinu, :ud, :nulos, :blancos, :numericality => { :greater_than_or_equal_to=>0, :less_than_or_equal_to => 400 }, :presence => true
+  validates :alianza, :dc, :liberal, :libre, :nacional, :pac, :pinu, :ud, :nulos, :blancos, :numericality => { :greater_than_or_equal_to=>0, :less_than_or_equal_to => 400 }, :presence => true
     
   after_save :update_counters
   

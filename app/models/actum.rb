@@ -3,7 +3,7 @@ class Actum < ActiveRecord::Base
 
   validates :numero, :uniqueness=> {:scope => :actum_type}
   
-  validates :faper, :alianza, :dc, :liberal, :libre, :nacional, :pac, :pinu, :ud, :nulos, :blancos, :numericality => { :greater_than_or_equal_to=>0, :less_than_or_equal_to => 400 }, :presence => true
+  validates :alianza, :dc, :liberal, :libre, :nacional, :pac, :pinu, :ud, :nulos, :blancos, :numericality => { :greater_than_or_equal_to=>0, :less_than_or_equal_to => 400 }, :presence => true
 
   belongs_to :user #, counter_cache: true
   belongs_to :municipio
