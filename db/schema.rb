@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131129180536) do
+ActiveRecord::Schema.define(:version => 20131205202928) do
 
   create_table "acta", :force => true do |t|
     t.string   "numero"
@@ -23,15 +23,17 @@ ActiveRecord::Schema.define(:version => 20131129180536) do
     t.integer  "dc"
     t.integer  "alianza"
     t.integer  "pinu"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "blancos"
     t.integer  "nulos"
     t.integer  "user_id"
     t.integer  "verified_count",   :default => 0
     t.boolean  "ready_for_review", :default => true
     t.boolean  "is_sum_ok",        :default => true
+    t.boolean  "image_changed",    :default => false
     t.string   "actum_type",       :default => "p"
+    t.integer  "municipio_id"
   end
 
   add_index "acta", ["liberal", "nacional", "libre", "pac", "ud", "dc", "alianza", "pinu", "blancos", "nulos"], :name => "acta_counts_index"
@@ -45,6 +47,27 @@ ActiveRecord::Schema.define(:version => 20131129180536) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
   end
+
+  create_table "departamentos", :force => true do |t|
+    t.string   "name"
+    t.integer  "num"
+    t.integer  "from_actum"
+    t.integer  "to_actum"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "municipios", :force => true do |t|
+    t.string   "name"
+    t.integer  "num"
+    t.integer  "from_actum"
+    t.integer  "to_actum"
+    t.integer  "departamento_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "municipios", ["departamento_id"], :name => "index_municipios_on_departamento_id"
 
   create_table "reportes", :force => true do |t|
     t.text     "body"
@@ -94,9 +117,10 @@ ActiveRecord::Schema.define(:version => 20131129180536) do
     t.boolean  "is_valid"
     t.integer  "acta_id"
     t.integer  "user_id"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.boolean  "is_sum_ok",  :default => true
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.boolean  "is_sum_ok",     :default => true
+    t.boolean  "image_changed", :default => false
   end
 
 end

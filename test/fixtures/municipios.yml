@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  num: 
+  from_actum: 
+  to_actum: 
+  departamento: 
+
+two:
+  name: MyString
+  num: 
+  from_actum: 
+  to_actum: 
+  departamento: 

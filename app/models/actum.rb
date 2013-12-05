@@ -1,11 +1,12 @@
 class Actum < ActiveRecord::Base
-  attr_accessible :alianza, :dc, :liberal, :libre, :nacional, :numero, :pac, :pinu, :ud, :nulos, :blancos, :user_id, :ready_for_review, :is_sum_ok, :actum_type
+  attr_accessible :alianza, :dc, :liberal, :libre, :nacional, :numero, :pac, :pinu, :ud, :nulos, :blancos, :user_id, :ready_for_review, :is_sum_ok, :actum_type, :municipio_id
 
   validates :numero, :uniqueness=> {:scope => :actum_type}
   
   validates :alianza, :dc, :liberal, :libre, :nacional, :pac, :pinu, :ud, :nulos, :blancos, :numericality => { :greater_than_or_equal_to=>0, :less_than_or_equal_to => 400 }, :presence => true
 
   belongs_to :user #, counter_cache: true
+  belongs_to :municipio
   has_many :verifications, class_name: "Verification",:foreign_key=>"acta_id"
   has_many :reportes
   after_save :update_counters
@@ -69,7 +70,7 @@ class Actum < ActiveRecord::Base
   def folder_number
     case self.actum_type
     when "p"
-      return 3
+      return 4
     when "a"
       return 1
     when "d"
@@ -83,8 +84,10 @@ class Actum < ActiveRecord::Base
   
   private
     def update_counters
-      user = User.find self.user_id
-      user.acta_count = user.acta.count
-      user.save
+      if user_id
+        user = User.find self.user_id
+        user.acta_count = user.acta.count
+        user.save
+      end
     end
 end
