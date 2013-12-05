@@ -66,6 +66,7 @@ class ActaController < ApplicationController
     @verification.ud=@actum.ud
     @verification.dc=@actum.dc
     @verification.alianza=@actum.alianza
+    @verification.faper=@actum.faper
     @verification.pinu=@actum.pinu
     @verification.blancos=@actum.blancos
     @verification.nulos=@actum.nulos
@@ -83,7 +84,7 @@ class ActaController < ApplicationController
    
     
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render( @actum.ready_for_review ? :show : :edit)}
       format.json { render json: @actum }
     end
  

@@ -7,7 +7,11 @@
 
 </div>
 
-<%= render 'form' %>
+<% if @actum.actum_type == 'a'%>
+  <%= render 'alcalde_form' %>
+<%else%>
+  <%= render 'form' %>
+<%end%>
 
 <%= link_to 'Show', @actum %> |
 <%= link_to 'Back', acta_path %>

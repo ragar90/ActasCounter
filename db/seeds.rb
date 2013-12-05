@@ -342,8 +342,8 @@ Municipio.create(:name=>"YORITO",:num=>11,:departamento_id=>department.id, :from
 sps = Municipio.find_by_name("SAN PEDRO SULA")
 (3094..4388).each do |n|
   actum = Actum.new(alianza:0 ,dc:0 ,liberal:0 ,libre:0 ,
-    nacional:0 ,pac:0 ,pinu:0 ,ud:0 ,nulos:0 ,blancos: 0,
-    municipio_id: sps.id, numero: n, actum_type: 'a')
+    nacional:0 ,pac:0 ,pinu:0 ,ud:0 ,nulos:0 ,blancos: 0, faper: 0,
+    municipio_id: sps.id, numero: n, actum_type: 'a', ready_for_review: false)
 
   if actum.save
     puts "Actum #{n} created"

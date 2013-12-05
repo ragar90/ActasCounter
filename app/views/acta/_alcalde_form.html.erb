@@ -1,0 +1,57 @@
+<%= form_for(@actum) do |f| %>
+  <%= f.hidden_field :numero %>
+  <% if @actum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@actum.errors.count, "error") %> prohibited this actum from being saved:</h2>
+
+      <ul>
+      <% @actum.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table id="editable-data">
+    <tr>
+      <td><b>Numero:</b></td><td><%="%05d" % @actum.numero %></td>
+    </tr>
+    <tr>
+      <td><b>UD:</b></td><td><%= f.number_field :ud %></td>
+    </tr>
+    <tr>
+      <td><b>DC:</b></td><td><%= f.number_field :dc%></td>
+    </tr>
+    <tr>
+      <td><b>Alianza Pat.</b></td><td><%= f.number_field :alianza %></td>
+    </tr>
+    <tr>
+      <td><b>Liberal:</b></td><td><%= f.number_field :liberal %></td>
+    </tr>
+    <tr>
+      <td><b>PAC:</b></td><td><%= f.number_field :pac %></td>
+    </tr>
+    <tr>
+      <td><b>Libre:</b></td><td><%= f.number_field :libre %></td>
+    </tr>
+    <tr>
+      <td><b>FAPER:</b></td><td><%= f.number_field :faper %></td>
+    </tr>
+    <tr>
+      <td><b>Pinu:</b></td><td><%= f.number_field :pinu %></td>
+    </tr>
+    <tr>
+      <td><b>Nacional:</b></td><td><%= f.number_field :nacional %></td>
+    </tr>
+    <tr>
+      <td><b>Blancos:</b></td><td><%= f.number_field :blancos %></td>
+    </tr>
+    <tr>
+      <td><b>Nulos:</b></td><td><%= f.number_field :nulos %></td>
+    </tr>
+  </table>
+    
+  <div class="actions">
+    <%= f.submit  "Registrar Acta" %>
+  </div>
+<% end %>
