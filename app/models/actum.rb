@@ -1,5 +1,5 @@
 class Actum < ActiveRecord::Base
-  attr_accessible :alianza, :dc, :liberal, :libre, :nacional, :numero, :pac, :pinu, :ud, :nulos, :blancos, :user_id, :ready_for_review,:is_sum_ok,:image_changed, :municipio_id
+  attr_accessible :faper, :alianza, :dc, :liberal, :libre, :nacional, :numero, :pac, :pinu, :ud, :nulos, :blancos, :user_id, :ready_for_review,:is_sum_ok,:image_changed, :municipio_id, :actum_type
 
   validates :numero, :uniqueness=> {:scope => :actum_type}
   

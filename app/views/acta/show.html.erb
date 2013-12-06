@@ -69,52 +69,11 @@
 		<%end%>
 	</table>
 
-	<table id="editable-data" style="display:none">
-		<tr>
-			<td><b>Numero:</b></td><td><%="%05d" % @actum.numero %></td>
-		</tr>
-		<tr>
-			<td><b>DC:</b></td><td><%= f.number_field :dc%></td>
-		</tr>
-		<tr>
-			<td><b>Alianza Pat.</b></td><td><%= f.number_field :alianza %></td>
-		</tr>
-		<tr>
-			<td><b>Liberal:</b></td><td><%= f.number_field :liberal %></td>
-		</tr>
-		<tr>
-			<td><b>PAC:</b></td><td><%= f.number_field :pac %></td>
-		</tr>
-		<tr>
-			<td><b>Libre:</b></td><td><%= f.number_field :libre %></td>
-		</tr>
-		<tr>
-			<td><b>UD:</b></td><td><%= f.number_field :ud %></td>
-		</tr>
-		<tr>
-			<td><b>Pinu:</b></td><td><%= f.number_field :pinu %></td>
-		</tr>
-		<tr>
-			<td><b>Nacional:</b></td><td><%= f.number_field :nacional %></td>
-		</tr>
-		<tr>
-			<td><b>Blancos:</b></td><td><%= f.number_field :blancos %></td>
-		</tr>
-		<tr>
-			<td><b>Nulos:</b></td><td><%= f.number_field :nulos %></td>
-		</tr>
-		<tr>
-			<td><b>Suma:</b></td><td class="total-sum"><span id="vote-sum" ><%=@totalVotos%></span></td>
-		</tr>
-		<tr>
-			<td colspan="2"><b><%=f.check_box :is_sum_ok, :style=>"width:15px"%> Coincide nuestra suma con la de la boleta (ultima fila)?</b></td>
-		</tr>
-		<%if current_user.is_admin%>
-		   <tr>
-			<td colspan="2"><b><%=f.check_box :image_changed, :style=>"width:15px"%> ¿La imagen cambio?</b></td>
-		</tr>
-		<%end%>
-	</table>
+	<% if @actum.actum_type == 'a'%>
+	  <%= render partial: 'alcalde_form', locals: {f: f} %>
+	<%else%>
+	  <%= render partial: 'presidente_form', locals: {f: f} %>
+	<%end%>
  
    <div style="float:left;margin-top:10px">	
    <%if @actum.verified_count<VERIFICATIONS or (@actum.verified_count>=VERIFICATIONS and current_user.is_admin)%>

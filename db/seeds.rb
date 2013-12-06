@@ -338,13 +338,16 @@ Municipio.create(:name=>"VICTORIA",:num=>10,:departamento_id=>department.id, :fr
 Municipio.create(:name=>"YORITO",:num=>11,:departamento_id=>department.id, :from_actum => 16062, :to_actum => 16094)
 
 
-sps = Municipio.find_by_name("SAN PEDRO SULA")
+# sps = Municipio.find_by_name("SAN PEDRO SULA")
 (3094..4388).each do |n|
-  actum = Actum.new(alianza:0 ,dc:0 ,liberal:0 ,libre:0 ,
-    nacional:0 ,pac:0 ,pinu:0 ,ud:0 ,nulos:0 ,blancos: 0, faper: 0,
-    municipio_id: sps.id, numero: n, actum_type: 'a', ready_for_review: false)
+  # actum = Actum.new(alianza:0 ,dc:0 ,liberal:0 ,libre:0 ,
+  #   nacional:0 ,pac:0 ,pinu:0 ,ud:0 ,nulos:0 ,blancos: 0, faper: 0,
+  #   municipio_id: sps.id, numero: n, actum_type: 'a', ready_for_review: false)
 
-  if actum.save
+  available_number = AvailableNumber.new(numero: n, has_valid_image: true,
+    actum_type: 'a')
+
+  if available_number.save
     puts "Actum #{n} created"
   else
     puts actum.errors[0]

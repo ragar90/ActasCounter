@@ -84,15 +84,21 @@ class ActaController < ApplicationController
    
     
     respond_to do |format|
-      format.html { render( @actum.ready_for_review ? :show : :edit)}
+      format.html # { render( @actum.ready_for_review ? :show : :edit)}
       format.json { render json: @actum }
     end
  
   end
 
   def new
+    type = if params[:type]
+        Actum.short_type(params[:type]) 
+      else
+        'p'
+      end
+
     begin
-      @next_available = AvailableNumber.where(:has_valid_image=>true, :already_assigned=>false).order("RANDOM()").reload.first
+      @next_available = AvailableNumber.where(:has_valid_image=>true, :already_assigned=>false, :actum_type => type ).order("RANDOM()").reload.first
     rescue
       @next_available = nil
     end
@@ -104,13 +110,14 @@ class ActaController < ApplicationController
       @numero = @next_available.numero.to_i
       @actum = Actum.new
       @actum.numero=@numero
-      @actum.liberal=@actum.nacional=@actum.libre=@actum.pac=@actum.ud=@actum.dc=@actum.alianza=@actum.pinu=@actum.blancos=@actum.nulos=0
+      @actum.faper=@actum.liberal=@actum.nacional=@actum.libre=@actum.pac=@actum.ud=@actum.dc=@actum.alianza=@actum.pinu=@actum.blancos=@actum.nulos=0
       @actum.user_id=current_user.id
       @actum.ready_for_review=false
+      @actum.actum_type = type
       @actum.save
       @next_available.update_attribute(:already_assigned,true) if @next_available
       
-      redirect_to @actum
+      redirect_to actum_type_path(@actum.full_type, @actum.numero)
       return
     end
   end

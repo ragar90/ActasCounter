@@ -1,5 +1,5 @@
 class AvailableNumber < ActiveRecord::Base
-  attr_accessible :numero, :has_valid_image, :already_assigned
+  attr_accessible :numero, :has_valid_image, :already_assigned, :actum_type
   
   def self.generate_all(from_num,to_num)
     (from_num..to_num).each do |i|

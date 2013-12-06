@@ -1,4 +1,5 @@
 ConteoActas::Application.routes.draw do
+  get "/acta/:type/new", to: "acta#new", as: "actum_type_new"
   resources :reportes, :except=>[:destroy, :edit, :update]
   resources :users, :except=>[:destroy, :new]
   resources :verifications, :except=>[:edit,:destroy,:update,:new]
