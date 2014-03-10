@@ -19,3 +19,4 @@
 /config/initializers/01_dev_environment.rb
 /config/database.yml
 /public/uploads/tmp/*
+/lib/actas/*
