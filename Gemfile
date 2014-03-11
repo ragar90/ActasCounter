@@ -26,6 +26,7 @@ group :assets do
 end
 
 gem "fog", "~> 1.3.1"
+gem 'rmagick'
 gem 'carrierwave'
 
 gem 'jquery-rails'

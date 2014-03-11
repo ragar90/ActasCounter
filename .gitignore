@@ -20,3 +20,5 @@
 /config/database.yml
 /public/uploads/tmp/*
 /lib/actas/*
+/lib/actas_images/*
+/lib_actas_images.zip
