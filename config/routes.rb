@@ -7,7 +7,8 @@ ConteoActas::Application.routes.draw do
   get "/acta/lista/:type/:id", to: "acta#show", as: "actum_type"
   
   resources :acta, :except=>[:edit,:update,:destroy]
-  
+  get "/sv/precidenciales/acta" => "acta#show_anonymus", as: :anonymus_actum
+  post "/sv/presidenciales/vericacion" => "verifications#create_anonymus", as: :anonymus_verification
   
   resources :user_profile
   

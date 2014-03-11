@@ -1,0 +1,22 @@
+<%= image_tag @acta.captcha %>
+<% form_for @verification,url: anonymus_verification_path,:html=>{:autocomplete=>:off} do |f| %>
+  <% if @verification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@verification.errors.count, "error") %> prohibited this actum from being saved:</h2>
+
+      <ul>
+      <% @verification.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :acta_id%>
+  <%= f.text_field :counter %>
+  <%= f.check_box :is_valid%>
+<% end -%>
+<div class = "other_submited">
+  <% @verifications.each do |verification| %>
+    <div class = "other_verification"><%= verification.counter%></div>
+  <% end %>
+</div>

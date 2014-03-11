@@ -53,4 +53,16 @@ class VerificationsController < ApplicationController
       end
     end
   end
+  def anonymus_create
+    @log = Verification.new(params[:verification])
+    @actum=Actum.where(id: @log.acta_id)
+    if @log.is_valid
+      @actum.verified_count+=1
+    else
+      @actum.verified_count=0
+      @actum.verifications.delete_all
+      @actum.verifications << @log
+    end
+    redirect_to anonymus_actum_path
+  end
 end

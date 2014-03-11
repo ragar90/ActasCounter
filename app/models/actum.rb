@@ -1,6 +1,10 @@
 class Actum < ActiveRecord::Base
-  attr_accessible :alianza,:dc,:liberal,:libre,:nacional,:numero,:pac,:pinu,:ud,:faper,:nulos,:blancos,:user_id, :ready_for_review,:is_sum_ok,:actum_type,:image_changed
-
+  attr_accessible :alianza,:dc,:liberal,:libre,:nacional,
+                  :numero,:pac,:pinu,:ud,:faper,:nulos,
+                  :blancos,:user_id, :ready_for_review,
+                  :is_sum_ok,:actum_type,:image_changed,
+                  :captcha, :contendiente
+  attr_accessor :counter
   validates :numero, :uniqueness=> {:scope => :actum_type}
   belongs_to :municipio 
   
@@ -10,6 +14,8 @@ class Actum < ActiveRecord::Base
   has_many :verifications, class_name: "Verification",:foreign_key=>"acta_id"
   has_many :reportes, class_name: "Reporte",:foreign_key=>"acta_id"
   after_save :update_counters
+
+
   
   ACTUM_TYPE_FULL = {
     "p" => "presidente",
@@ -22,6 +28,8 @@ class Actum < ActiveRecord::Base
     "alcalde" => "a",
     "diputados" => "d"
   }
+
+
   
   def get_municipio_id
     if self.actum_type=="a"
@@ -84,6 +92,10 @@ class Actum < ActiveRecord::Base
     Actum.where(["user_id<>? AND ready_for_review=? AND id NOT IN (?) and verified_count<?",current_user.id,true,current_user.verifications.map{ |x| x.acta_id },VERIFICATIONS]).order("RANDOM()").first
   end
 
+  def self.random
+    Actum.where(["ready_for_review=? AND verified =? and verified_count<?",true,false,VERIFICATIONS]).order("RANDOM()").first
+  end
+
   def self.short_type(type)
     ACTUM_TYPE_SHORT[type]
   end
@@ -105,6 +117,10 @@ class Actum < ActiveRecord::Base
     when "d"
       return 1
     end
+  end
+
+  def counters_consitency
+    
   end
 
   

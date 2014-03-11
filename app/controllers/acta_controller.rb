@@ -167,4 +167,12 @@ class ActaController < ApplicationController
       return
     end
   end
+
+  def show_anonymus
+    @acta = Actum.random
+    @verification = Verification.new
+    @verification.acta_id = @acta.id
+    @verification.verification_number = @acta.verified_count + 1
+    @verifications = @acta.verifications
+  end
 end
